@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <title>Đăng ký</title>
+        <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #e0e0e0;
+        margin: 0;
+        text-align: center;
+        background-size: cover;
+        background-position: center;
+    }
+    h1 {
+        color: #333;
+        font-size: 3em; /* Increase font size */
+        font-weight: bold; /* Make the text bold */
+        }
+    form {
+        padding: 20px;
+        font-weight: bold;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        display: inline-block;
+    }
+
+    #photo-container {
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping to next row */
+        justify-content: center; /* Center align items */
+        align-items: center; /* Center align items */
+        overflow-y: auto;
+        max-height: 400px;
+    }
+    #photo-container img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin: 5px; /* Add margin between images */
+        border-radius: 5px;
+    }
+.note {
+    margin-top: 20px;
+    color: #777;
+    font-style: italic;
+}
+
+
+/* Style the scrollbar track */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Style the scrollbar thumb */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 6px;
+        }
+
+        /* Hover effect on the scrollbar thumb */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Style the scrollbar buttons (arrows) */
+        ::-webkit-scrollbar-button {
+            display: none;
+        }
+
+        /* Style the scrollbar corner */
+        ::-webkit-scrollbar-corner {
+            background: #f1f1f1;
+        }
+
+        /* For Firefox */
+        scrollbar-width: thin;
+        scrollbar-color: #888 #f1f1f1;
+
+
+</style>
+    </head>
+    <body>
+        <header class="text-gray-400 bg-gray-900 body-font">
+            <div
+                class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+                <a
+                    class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+                    <img src="{{url_for('static', filename='images/logo.png')}}"
+                        height="50" width="50" style="border-radius: 50%;" />
+                    <span class="ml-3 text-xl">CheckInSync</span>
+                </a>
+            </div>
+        </header>
+
+        <section class="text-gray-400 bg-gray-900 body-font">
+            <div class="container px-5 py-12 mx-auto">
+                <div class="text-center mb-20">
+                    <h1
+                        class="sm:text-3xl text-2xl font-medium title-font text-white m-auto">CheckInSync</h1>
+                    <p
+                        class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-400 text-opacity-80">Tháo gỡ
+                        những khó khăn, khiến việc tổ chức hội nghị trở nên dễ dàng hơn.</p>
+                    <div class="flex mt-6 justify-center">
+                        <div
+                            class="w-16 h-1 rounded-full bg-blue-500 inline-flex"></div>
+                    </div>
+                </div>
+                <div
+                    class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6">
+                    <div
+                        class="p-4 md:w-1/3 flex flex-col text-center items-center">
+                        <div
+                            class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-gray-800 text-blue-400 mb-5 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                        </div>
+                        <div class="flex-grow">
+                            <h2
+                                class="text-white text-lg title-font font-medium mb-3">Tính
+                                Năng</h2>
+                            <p class="leading-relaxed text-base">Thu thập thông tin khách mời nhanh và hiệu quả.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="p-4 md:w-1/3 flex flex-col text-center items-center">
+                        <div
+                            class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-gray-800 text-blue-400 mb-5 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        </div>
+                        <div class="flex-grow">
+                            <h2
+                                class="text-white text-lg title-font font-medium mb-3">Tiện
+                                Ích</h2>
+                            <p class="leading-relaxed text-base">Nhanh gọn, dễ dàng, tiện lợi, dễ sử dụng.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="p-4 md:w-1/3 flex flex-col text-center items-center">
+                        <div
+                            class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-gray-800 text-blue-400 mb-5 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polygon points="13 19 22 12 13 5 13 19"></polygon><polygon points="2 19 11 12 2 5 2 19"></polygon></svg>
+                        </div>
+                        <div class="flex-grow">
+                            <h2
+                                class="text-white text-lg title-font font-medium mb-3">Tiết kiệm chi phí</h2>
+                            <p class="leading-relaxed text-base">Chi phí triển khai, phù hợp với cả tổ chức vừa và nhỏ.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="text-gray-400 bg-gray-900 body-font">
+            <form action="/" method="POST" class="max-w-6xl mx-auto p-8">
+                <h1 class="text-3xl mb-4 text-white title-font">Đăng ký ngay</h1>
+                <div class="my-4">
+                    <input type="text" placeholder="Họ và tên sinh viên" id="name" name="name" required
+                        class="w-full px-4 py-2 rounded-md bg-gray-800 text-white outline-none focus:bg-gray-700" />
+                </div>
+                <div class="my-4">
+                    <input type="text" placeholder="Mã số sinh viên" id="mssv" name="mssv" required
+                        class="w-full px-4 py-2 rounded-md bg-gray-800 text-white outline-none focus:bg-gray-700" />
+                </div>
+                <div class="my-4">
+                    <select id="faculty" name="faculty" required class="w-full px-4 py-2 rounded-md bg-gray-800 text-white outline-none focus:bg-gray-700">
+                        <option value="">Khoa của bạn</option>
+                        <option value="Điện - Điện tử">Điện - Điện tử</option>
+                        <option value="Kỹ thuật xây dựng">Kỹ thuật xây dựng</option>
+                        <option value="Cơ khí">Cơ khí</option>
+                        <option value="Kỹ thuật hóa học">Kỹ thuật hóa học</option>
+                        <option value="Khoa học và kỹ thuật máy tính">Khoa học và kỹ thuật máy tính</option>
+                        <option value="Công nghệ vật liệu">Công nghệ vật liệu</option>
+                        <option value="Khoa học ứng dụng">Khoa học ứng dụng</option>
+                        <option value="Kỹ thuật giao thông">Kỹ thuật giao thông</option>
+                        <option value="Quản lý công nghiệp">Quản lý công nghiệp</option>
+                        <option value="Kỹ thuật địa chất và dầu khí">Kỹ thuật địa chất và dầu khí</option>
+                        <option value="Môi trường và tài nguyên">Môi trường và tài nguyên</option>
+                        <option value="Trung tâm bảo dưỡng công nghiệp">Trung tâm bảo dưỡng công nghiệp</option>
+                    </select>
+                </div>
+                <div class="my-4">
+                    <input type="email" placeholder="Email" id="email" name="email" required
+                        class="w-full px-4 py-2 rounded-md bg-gray-800 text-white outline-none focus:bg-gray-700" />
+                </div>
+                <div class="my-4">
+                    <input type="text" placeholder="Số điện thoại" id="phone_number" name="phone_number"
+                        required
+                        class="w-full px-4 py-2 rounded-md bg-gray-800 text-white outline-none focus:bg-gray-700" />
+                </div>
+                <div class="my-4">
+                    <select id="current_school_year" name="current_school_year" required class="w-full px-4 py-2 rounded-md bg-gray-800 text-white outline-none focus:bg-gray-700">
+                        <option value="">Sinh viên khóa</option>
+                        <option value="K23">K23</option>
+                        <option value="K22">K22</option>
+                        <option value="K21">K21</option>
+                        <option value="K20">K20</option>
+                        <option value="K19">K19</option>
+                        <option value="K18">K18</option>
+                        <option value="K17">K17</option>
+                        <option value="K16">K16</option>
+                    </select>
+                </div>
+            </br>
+                <div class="grid grid-cols-2 gap-5">
+                    <div>
+                        <!-- Content for the left section -->
+                        <div class="camera-preview border-solid border-4 border-blue-500">
+                            <video id="camera-preview" width="640" height="580"
+                                autoplay></video>
+                        </div>
+                        <div class="note text-white">Nhấn giữ để chụp nhiều ảnh, hệ
+                            thống sẽ tự động thông báo và đăng ký khi đã thu đủ ảnh,
+                            quá trình này sẽ mất tầm 30 giây</div>
+                        <div class="note text-white">Chú ý: Căn chỉnh khuôn mặt để
+                            thu được ảnh rõ nét, có thể nghiêng mặt nhẹ theo các
+                            hướng để thu được nhiều dữ liệu về khuôn mặt hơn</div>
+                        </br>
+                        <button type="button" onmousedown="startCapture()"
+                        onmouseup="stopCapture()"
+                        class="bg-blue-500 text-white px-4 py-2 rounded-md focus:outline-none hover:bg-blue-600">Chụp
+                        ảnh</button>
+                    </div>
+                    <div>
+                        <!-- Content for the right section -->
+                        <div id="photo-container" class="m-auto"></div>
+                    </br>
+                        <button type="button" onclick="deleteAllPhotos()" class="bg-red-500 text-white px-4 py-2 rounded-md focus:outline-none hover:bg-red-600">Xóa tất cả ảnh</button>
+                    </div>
+                </div>
+            </br>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md focus:outline-none hover:bg-blue-600">Đăng ký</button>
+            </form>
+        </section>
+
+        
+        <footer class="text-gray-400 bg-gray-900 body-font">
+            <div
+                class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+                <div
+                    class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left md:mt-0 mt-10">
+                    <a
+                        class="flex title-font font-medium items-center md:justify-start justify-center text-white">
+                        <img
+                            src="{{url_for('static', filename='images/logo.png')}}"
+                            height="50" width="50"
+                            style="border-radius: 50%;" />
+                        <span class="ml-3 text-xl">CheckInSync</span>
+                    </a>
+                </div>
+                <div
+                    class="flex-grow flex flex-wrap md:pr-20 -mb-10 md:text-left text-center order-first">
+                    <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                        <h2
+                            class="title-font font-medium text-white tracking-widest text-sm mb-3">DỰ
+                            ÁN CỦA TÔI</h2>
+                    </div>
+                    <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                        <h2
+                            class="title-font font-medium text-white tracking-widest text-sm mb-3">PHẦN
+                            MỀM ỨNG DỤNG</h2>
+                    </div>
+                    <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                        <h2
+                            class="title-font font-medium text-white tracking-widest text-sm mb-3">NGHIÊN
+                            CỨU VÀ PHÁT TRIỂN</h2>
+                    </div>
+                    <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                        <h2
+                            class="title-font font-medium text-white tracking-widest text-sm mb-3">THỬ
+                            NGHIỆM VÀ PHẢN HỒI</h2>
+                    </div>
+                </div>
+
+            </div>
+            <div class="bg-gray-800 bg-opacity-75">
+                <div
+                    class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+                    <p
+                        class="text-gray-400 text-sm text-center sm:text-left">©
+                        2024 CheckInSync —
+                        <a href="#" class="text-gray-500 ml-1"
+                            rel="noopener noreferrer"
+                            target="_blank">@Check In</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            const video = document.getElementById("camera-preview");
+            const photoContainer = document.getElementById("photo-container");
+            let photoDataUrls = [];
+            let isCapturing = false;
+            let captureInterval;
+            const maxPhotos = 200; // Set the maximum number of photos
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then((stream) => {
+                    video.srcObject = stream;
+                })
+                .catch((error) => {
+                    console.error("Failed to access the camera:", error);
+                });
+          
+            function startCapture() {
+                if (!isCapturing) {
+                    isCapturing = true;
+                    captureInterval = setInterval(() => {
+                        if (photoDataUrls.length < maxPhotos) {
+                            capturePhoto();
+                        } else {
+                            stopCapture();
+                        }
+                    }, 10);
+                }
+            }
+          
+            function stopCapture() {
+                if (isCapturing) {
+                    isCapturing = false;
+                    clearInterval(captureInterval);
+                    // Removed the automatic form submission logic
+                }
+            }
+          
+            function capturePhoto() {
+                const canvas = document.createElement("canvas");
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+                const photoDataUrl = canvas.toDataURL("image/png");
+                photoDataUrls.push(photoDataUrl);
+                const image = document.createElement("img");
+                image.src = photoDataUrl;
+                photoContainer.appendChild(image);
+                const photoInput = document.createElement("input");
+                photoInput.type = "hidden";
+                photoInput.name = "photo";
+                photoInput.value = photoDataUrl;
+                photoContainer.appendChild(photoInput);
+            }
+
+            function deleteAllPhotos() {
+                // Clear the photoDataUrls array
+                photoDataUrls = [];
+                // Remove all child nodes from the photoContainer
+                while (photoContainer.firstChild) {
+                    photoContainer.removeChild(photoContainer.firstChild);
+                }
+                // Remove all hidden input elements that store photo data URLs
+                const hiddenInputs = document.querySelectorAll('input[type="hidden"][name="photo"]');
+                hiddenInputs.forEach(input => input.remove());
+            }
+
+            function stopCapture() {
+                if (isCapturing) {
+                    isCapturing = false;
+                    clearInterval(captureInterval);
+                    // Check if the maximum number of photos has been reached
+                    if (photoDataUrls.length >= maxPhotos) {
+                        // Display an alert to the user
+                        alert("Đã chụp đủ số lượng ảnh cần thiết. Xin hãy kiểm tra lại hình ảnh và nhấn đăng ký!");
+                    }
+                }
+            }
+
+          </script>
+    </body>
+</html>

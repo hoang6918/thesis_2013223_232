@@ -1,0 +1,9 @@
+opencv-python
+db-sqlite3
+numpy
+datetime
+gspread
+oauth2client
+mtcnn
+scikit-learn
+deepface

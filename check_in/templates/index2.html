@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video Stream</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>    <style>
+        /* Adjusted styles for a more compact layout */
+        .video-img-container img {
+            max-height: 200px; /* Reduced max height */
+            object-fit: cover;
+            width: auto; /* Ensure aspect ratio is maintained */
+        }
+        .loader {
+            border: 8px solid #f3f3f3; /* Reduced border size */
+            border-radius: 50%;
+            border-top: 8px solid #3498db; /* Reduced border size */
+            width: 60px; /* Reduced size */
+            height: 60px; /* Reduced size */
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .flex-item {
+            flex: 1 1 30%;
+            margin: 5px; /* Reduced margin */
+            text-align: center;
+        }
+        .text-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 5px; /* Reduced padding */
+            margin-top: 5px; /* Reduced margin */
+        }
+        h1, h2, p {
+            margin: 0.5rem; /* Reduced margin */
+            font-size: 0.9rem; /* Reduced font size */
+        }
+        h2 {
+            font-size: 1rem; /* Slightly larger font size for h2 */
+        }
+        .standard-img-size {
+            width: 400px; /* Set width */
+            height: 400px; /* Set height */
+            object-fit: cover; /* This will ensure the aspect ratio is maintained without stretching the image */
+        }
+    </style>
+    <script>
+        function fetchAndUpdateInfo() {
+            fetch("/latest-info")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("recognizedName_default").innerText = "Họ và tên: " + data.info_default.name;  
+                    document.getElementById("recognizedIdCode_default").innerText = "Mã số sinh viên: " + data.info_default.id_code;  
+                    document.getElementById("recognizedDepartment_default").innerText = "Sinh viên khoa: " + data.info_default.department;
+                    document.getElementById("recognizedClassName_default").innerText = "Sinh viên khóa: " + data.info_default.class_name;
+
+                    document.getElementById("recognizedName_rtsp").innerText = "Họ và tên: " + data.info_rtsp.name;  
+                    document.getElementById("recognizedIdCode_rtsp").innerText = "Mã số sinh viên: " + data.info_rtsp.id_code;  
+                    document.getElementById("recognizedDepartment_rtsp").innerText = "Sinh viên khoa: " + data.info_rtsp.department;
+                    document.getElementById("recognizedClassName_rtsp").innerText = "Sinh viên khóa: " + data.info_rtsp.class_name;
+
+
+                    if(data.info_default.name !== "Unknown") {
+                        document.getElementById("capturedImage1").src = `/static/${data.info_default.id_code}.jpg`;
+                        document.getElementById("capturedImage1").classList.remove('hidden');
+                        
+                        setTextColor_default("green");  
+
+                    } if(data.info_default.name == "Unknown") {
+                        document.getElementById("capturedImage1").src = `/static/Unknown.jpg`;
+                        document.getElementById("capturedImage1").classList.remove('hidden');  
+                                                
+                        const warningText = "<strong>NGƯỜI LẠ!!!</strong>";
+                        document.getElementById("recognizedName_default").innerHTML = warningText;
+                        document.getElementById("recognizedIdCode_default").innerHTML = warningText;
+                        document.getElementById("recognizedDepartment_default").innerHTML = warningText;
+                        document.getElementById("recognizedClassName_default").innerHTML = warningText;
+                        
+                        setTextColor_default("red");
+                    } if(data.info_default.name == "warning") {
+                        document.getElementById("capturedImage1").src = `/static/warning.jpg`;
+                        document.getElementById("capturedImage1").classList.remove('hidden');
+
+                        const warningText = "<strong>KHÔNG PHÁT HIỆN KHUÔN MẶT!!!</strong>";
+                        document.getElementById("recognizedName_default").innerHTML = warningText;
+                        document.getElementById("recognizedIdCode_default").innerHTML = warningText;
+                        document.getElementById("recognizedDepartment_default").innerHTML = warningText;
+                        document.getElementById("recognizedClassName_default").innerHTML = warningText;
+
+                        setTextColor_default("red");
+                    }
+
+                    document.getElementById("capturedImage1").classList.add('standard-img-size');
+
+
+
+                    if(data.info_rtsp.name !== "Unknown") {
+                        document.getElementById("capturedImage2").src = `/static/${data.info_rtsp.id_code}.jpg`;
+                        document.getElementById("capturedImage2").classList.remove('hidden');
+                        
+                        setTextColor_default("green");
+
+                    } if(data.info_rtsp.name == "Unknown") {
+                        document.getElementById("capturedImage2").src = `/static/Unknown.jpg`;
+                        document.getElementById("capturedImage2").classList.remove('hidden');  
+                                                
+                        const warningText = "<strong>NGƯỜI LẠ!!!</strong>";
+                        document.getElementById("recognizedName_rtsp").innerHTML = warningText;
+                        document.getElementById("recognizedIdCode_rtsp").innerHTML = warningText;
+                        document.getElementById("recognizedDepartment_rtsp").innerHTML = warningText;
+                        document.getElementById("recognizedClassName_rtsp").innerHTML = warningText;
+                        
+                        setTextColor_rtsp("red");
+                    } if(data.info_rtsp.name == "warning") {
+                        document.getElementById("capturedImage2").src = `/static/warning.jpg`;
+                        document.getElementById("capturedImage2").classList.remove('hidden');
+    
+                        const warningText = "<strong>KHÔNG PHÁT HIỆN KHUÔN MẶT!!!</strong>";
+                        document.getElementById("recognizedName_rtsp").innerHTML = warningText;
+                        document.getElementById("recognizedIdCode_rtsp").innerHTML = warningText;
+                        document.getElementById("recognizedDepartment_rtsp").innerHTML = warningText;
+                        document.getElementById("recognizedClassName_rtsp").innerHTML = warningText;
+
+                        setTextColor_rtsp("red");
+                    }
+
+                    document.getElementById("capturedImage2").classList.add('standard-img-size');
+                });
+            setTimeout(fetchAndUpdateInfo, 2000);
+        }
+
+        function setTextColor_default(color) {
+            document.getElementById("recognizedName_default").style.color = color;
+            document.getElementById("recognizedIdCode_default").style.color = color;
+            document.getElementById("recognizedDepartment_default").style.color = color;
+            document.getElementById("recognizedClassName_default").style.color = color;
+        }
+
+        function setTextColor_rtsp(color) {
+            document.getElementById("recognizedName_rtsp").style.color = color;
+            document.getElementById("recognizedIdCode_rtsp").style.color = color;
+            document.getElementById("recognizedDepartment_rtsp").style.color = color;
+            document.getElementById("recognizedClassName_rtsp").style.color = color;
+        }
+    </script>
+</head>
+<body onload="fetchAndUpdateInfo();" class="bg-gray-900 text-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8"> 
+        <h1 class="text-4xl font-bold text-center mb-8 text-white">Chào mừng các bạn sinh viên đến tham dự hội nghị</h1>
+        <div class="flex flex-wrap justify-center items-start gap-4">
+            <div class="flex-item bg-gray-500 p-4 rounded-lg shadow-xl"> 
+                <h2 class="text-3xl font-semibold mb-4 text-indigo-800">CAMERA 1</h2>
+                <div class="content-container" style="width: 400px; margin: auto;">
+                <div id="loader2" class="loader mx-auto mb-4"></div> 
+                <img src="{{ url_for('video_feed_default') }}" class="rounded-lg shadow-xl mb-4 standard-img-size" alt="Camera 1 Video Stream" onload="document.getElementById('loader2').style.display='none'; this.style.display='block';">
+                <img id="capturedImage1" class="rounded-lg shadow-xl mb-4 standard-img-size" alt="Captured Image 1">
+                <div class="text-container bg-white text-gray-800 p-4 rounded-lg"> 
+                    <h2 class="text-2xl font-semibold mb-2">Thông tin khách mời</h2>
+                    <p class"text-xl" id="recognizedName_default">Họ và tên: </p>
+                    <p class"text-xl" id="recognizedIdCode_default">Mã số sinh viên: </p>
+                    <p class"text-xl" id="recognizedDepartment_default">Khoa: </p>
+                    <p class"text-xl" id="recognizedClassName_default">Sinh viên khóa: </p>
+                </div>
+            </div>
+            </div>
+            <div class="flex-item bg-gray-500 p-4 rounded-lg shadow-xl"> 
+                <h2 class="text-3xl font-semibold mb-4 text-indigo-800">CAMERA 2</h2>
+                <div class="content-container" style="width: 400px; margin: auto;"> 
+                <div id="loader1" class="loader mx-auto mb-4"></div>
+                <img src="{{ url_for('video_feed_rtsp') }}" class="rounded-lg shadow-xl mb-4 standard-img-size" alt="Camera 2 Video Stream" onload="document.getElementById('loader1').style.display='none'; this.style.display='block';">
+                <img id="capturedImage2" class="rounded-lg shadow-xl mb-4 standard-img-size" alt="Captured Image 2">
+                <div class="text-container bg-white text-gray-800 p-4 rounded-lg">
+                    <h2 class="text-2xl font-semibold mb-2">Thông tin khách mời</h2>
+                    <p class"text-xl" id="recognizedName_rtsp">Họ và tên: </p>
+                    <p class"text-xl" id="recognizedIdCode_rtsp">Mã số sinh viên: </p>
+                    <p class"text-xl" id="recognizedDepartment_rtsp">Khoa: </p>
+                    <p class"text-xl" id="recognizedClassName_rtsp">Sinh viên khóa: </p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
